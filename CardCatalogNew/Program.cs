@@ -16,6 +16,8 @@ public class Program
         string choice = "";
         do
         {
+            //this is my menu
+
             Console.WriteLine("1.\tList All Books");
             Console.WriteLine("2.\tAdd A Book");
             Console.WriteLine("3.\tSave And Exit");
@@ -61,11 +63,3 @@ public class Program
 }
 
 
-
-//[Serializable]    //Only needed if I use BinaryFormatter
-public class Book
-{
-    public string Author { get; set; }
-    public string Title { get; set; }
-    public int Year { get; set; }
-}

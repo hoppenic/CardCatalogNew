@@ -6,8 +6,8 @@ namespace CardCatalogNew
 {
     public class CardCatalog
     {
-        private string _filename;
-        private List<Book> books;
+        public string _filename;
+        public List<Book> books;
 
         public CardCatalog(string fileName)
         {
@@ -32,6 +32,8 @@ namespace CardCatalogNew
         }
         public Book[] ListBooks()
         {
+
+            //can I do a list here?
             return books.ToArray();
         }
         public void AddBook(string author, string title, int year)
