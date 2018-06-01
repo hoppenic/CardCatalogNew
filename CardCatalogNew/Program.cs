@@ -26,6 +26,7 @@ public class Program
             switch (choice)
             {
                 case "1":
+                    //for each instance book in my list of books
                     foreach (Book book in cardCatalog.ListBooks())
                     {
                         Console.WriteLine("{0}\t{1}\t{2}", book.Title, book.Author, book.Year);

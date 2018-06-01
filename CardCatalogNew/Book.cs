@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Text;
+using CardCatalogNew;
+
+using System;
 
 namespace CardCatalogNew
 {

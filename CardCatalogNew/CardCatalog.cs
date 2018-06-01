@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Text;
+using CardCatalogNew;
+
+using System;
 
 namespace CardCatalogNew
 {
@@ -30,12 +32,18 @@ namespace CardCatalogNew
                 books = new List<Book>();
             }
         }
-        public Book[] ListBooks()
+
+
+
+        //put books in an array method
+        private Book[] ListBooks()
         {
 
             //can I do a list here?
             return books.ToArray();
         }
+
+        //add a book method, taking three arguments
         public void AddBook(string author, string title, int year)
         {
             Book newBook = new Book
@@ -57,6 +65,8 @@ namespace CardCatalogNew
                 System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Book>));
                 serializer.Serialize(stream, books);
 
+
+                //have to close file stream
                 stream.Close();
             }
 
