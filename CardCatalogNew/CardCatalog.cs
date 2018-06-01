@@ -1,15 +1,18 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using CardCatalogNew;
-
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace CardCatalogNew
+
 {
     public class CardCatalog
     {
         public string _filename;
-        public List<Book> books;
+        private List<Book> books;
 
         public CardCatalog(string fileName)
         {
@@ -31,6 +34,12 @@ namespace CardCatalogNew
             {
                 books = new List<Book>();
             }
+
+
+
+
+
+
         }
 
 
@@ -54,6 +63,8 @@ namespace CardCatalogNew
             };
             books.Add(newBook);
         }
+
+
         public void Save()
         {
             using (System.IO.FileStream stream = new System.IO.FileStream(this._filename, System.IO.FileMode.OpenOrCreate))
