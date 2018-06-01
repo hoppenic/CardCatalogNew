@@ -3,25 +3,83 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using CardCatalogNew;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace CardCatalogNew
 {
     public class CardCatalog
     {
-        public string _fileName { get; set; }
-        public List<Book> books { get; set; }
+        private string _fileName { get; set; }
+        private List<Book> books { get; set; }
 
 
         //this is my constructor
         public CardCatalog(string fileName)
+        {
+            //feeding file in
+            _fileName = fileName;
+            if (System.IO.File.Exists(fileName))
+            {
+                using (System.IO.FileStream stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open))
+                {
+                    System.Xml.Serialization.XmlSerializer serialier = new System.Xml.Serialization.XmlSerializer(typeof(List<Book>));
+
+                    stream.Close();
+                }
+            }
+
+            if (books == null)
+            {
+                books = new List<Book>();
+            }
+
+        }
+        public Book[] ListOfBooks()
+        {
+            return books.ToArray();
+        }
+
+        //has to match up with your Book class
+        public void AddBook(string author,string title,int year)
+        {
+            Book newBook = new Book
+            {
+                Author = author,
+                Title = title,
+                Year = year
+
+            };
+
+            books.Add(newBook);
+
+        }
+
+        public void Save()
+        {
+            using (System.IO.FileStream stream = new System.IO.FileStream(this._fileName,System.IO.FileMode.OpenOrCreate))
+            {
+
+                System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Book>));
+                serializer.Serialize(stream, books);
+
+                stream.Close();
+
+            }
 
 
-
-
-
-
+        }
 
 
     }
-}
+
+    
+
+        
+ }
+
+
+
+
+
