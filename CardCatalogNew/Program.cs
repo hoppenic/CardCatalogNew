@@ -17,11 +17,13 @@ namespace CardCatalogNew
         static void Main(string[] args)
         {
 
+            //prompt user to enter a file, feed file int a string
             Console.WriteLine("Enter your file name");
             string userFile = Console.ReadLine();
             CardCatalog cardCatalog=new CardCatalog(userFile);
             Console.Clear();
 
+            //this gives us the initial menu for user to look at, then allows them to make choice
             string userChoice = "";
             do
             {
