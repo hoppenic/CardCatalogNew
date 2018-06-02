@@ -5,8 +5,7 @@ using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
-
-
+using System.Collections.Specialized;
 
 
 
@@ -20,22 +19,22 @@ namespace CardCatalogNew
 
             Console.WriteLine("Enter your file name");
             string userFile = Console.ReadLine();
-            CardCatalog cardCatalog=new CardCatalog(fileName);
+            CardCatalog cardCatalog=new CardCatalog(userFile);
             Console.Clear();
 
             string userChoice = "";
             do
             {
-                Console.WriteLine("List all Books");
-                Console.WriteLine("Add a book");
-                Console.WriteLine("Save and exit");
+                Console.WriteLine("1: List all Books");
+                Console.WriteLine("2: Add a book");
+                Console.WriteLine("3: Save and exit");
                 userChoice = Console.ReadLine();
                 Console.Clear();
                 switch (userChoice)
                 {
 
                     case "1":
-                        foreach(Book book in cardCatalog.ListOfBooks())
+                        foreach (Book book in cardCatalog.ListOfBooks())
                         {
                             Console.WriteLine($"{book.Author}, {book.Title}, {book.Year}");
                         }
@@ -56,22 +55,17 @@ namespace CardCatalogNew
                     case "3":
                         cardCatalog.Save();
                         break;
-
-
-
-
+                    default:
+                        {
+                            Console.WriteLine("Not a Valid Choice");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
 
                 }
 
-            }
-
-
-
-
-
-
-
-
+            } while (userChoice != "3");
 
 
         }
@@ -81,7 +75,7 @@ namespace CardCatalogNew
     public class CardCatalog
     {
 
-        public string _fileName { get; set; }
+        private string _fileName { get; set; }
         private List<Book> books { get; set; }
 
 

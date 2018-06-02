@@ -4,8 +4,10 @@ using System.Text;
 
 namespace CardCatalogNew
 {
-    class Book
+    public class Book
     {
+
+        //Book class
         //how we describe our books
 
             public string Author { get; set; }
