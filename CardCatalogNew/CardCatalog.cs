@@ -5,6 +5,8 @@ using System.IO;
 using CardCatalogNew;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
+
 
 
 namespace CardCatalogNew
@@ -42,6 +44,7 @@ namespace CardCatalogNew
         }
 
         //has to match up with your Book class
+        //method to allow to add book to our library
         public void AddBook(string author,string title,int year)
         {
             Book newBook = new Book
@@ -56,6 +59,8 @@ namespace CardCatalogNew
 
         }
 
+
+        // method to save book to our library
         public void Save()
         {
             using (System.IO.FileStream stream = new System.IO.FileStream(this._fileName,System.IO.FileMode.OpenOrCreate))
