@@ -12,74 +12,92 @@ using CardCatalogNew;
 namespace CardCatalogNew
 {
 
-
     public class Program
     {
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Enter name of file");
-            string newFile = Console.ReadLine();
-            //cardcatalog class
-            CardCatalog cardCatalog = new CardCatalog(newFile);
-            Console.Clear();
+            Console.WriteLine("Enter your file name");
+            string userFile = Console.ReadLine();
 
 
-            //initialize what user wants
-            string userChoice = "";
 
-            do
-            {
-                Console.WriteLine("List all books");
-                Console.WriteLine("Add a book");
-                Console.WriteLine("Save + Exit");
-                Console.Clear();
 
-                switch (userChoice)
-                {
-                    case "1":
-                        foreach (Book book in cardCatalog.ListOfBooks())
-                        {
-                            Console.WriteLine($"{book.Title}, {book.Author}, {book.Year}");
-                        }
-                        Console.WriteLine("Press enter to continue");
-                        Console.ReadLine();
-                        Console.Clear();
-                        break;
-                    case "2":
-                        Console.WriteLine("Enter your title");
-                        string bookTitle = Console.ReadLine();
-                        Console.WriteLine("Enter an author");
-                        string bookAuthor = Console.ReadLine();
-                        Console.WriteLine("Enter a year");
-                        int bookYear = Convert.ToInt32(Console.ReadLine());
-                        CardCatalog.AddBook(bookAuthor, bookTitle, bookYear);
-                        Console.Clear();
-                        break;
-                    case "3":
-                        cardCatalog.Save();
-                        break;
-                    default:
-                        {
-                            Console.WriteLine("Invalid, press enter");
-                            Console.ReadLine();
-                            Console.Clear();
-                            break;
-                        }
 
-                }
 
-            } while (userChoice != "3");
-        
+
 
 
 
 
         }
+
     }
+
+    public class CardCatalog
+    {
+
+        public string _fileName { get; set; }
+        private List<Book> books { get; set; }
+
+
+        //this is my constructor
+        public CardCatalog(string fileName)
+        {
+
+            _fileName = fileName;
+            if (System.IO.File.Exists(fileName))
+            {
+                using (System.IO.FileStream stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open))
+                {
+                    System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Book>));
+                    books = serializer.Deserialize(stream) as List<Book>;
+
+                    stream.Close();
+
+                }
+            }
+
+            if (books == null)
+            {
+                books = new List<Book>();
+            }
+
+            //CardCatalog ends here
+        }
+
+
+        //method to return book array
+        public Book[] ListOfBooks()
+        {
+            return books.ToArray();
+        }
+
+
+        public void AddBook(string bookAuthor,string bookTitle,int bookyear)
+        {
+
+            a
+
+        }
+
+
+
+
+
+
+    }
+
+
+}  
+
+
+
+
+
 
 
 
 
    
-}
+
