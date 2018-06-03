@@ -67,6 +67,7 @@ namespace CardCatalogNew
 
                 }
 
+                //do the above UNTIL They choose 3
             } while (userChoice != "3");
 
 
@@ -74,81 +75,7 @@ namespace CardCatalogNew
 
     }
 
-    public class CardCatalog
-    {
-
-        private string _fileName { get; set; }
-        private List<Book> books { get; set; }
-
-
-        //this is my constructor
-        public CardCatalog(string fileName)
-        {
-
-            _fileName = fileName;
-            if (System.IO.File.Exists(fileName))
-            {
-                using (System.IO.FileStream stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open))
-                {
-                    System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Book>));
-                    books = serializer.Deserialize(stream) as List<Book>;
-
-                    stream.Close();
-
-                }
-            }
-
-            if (books == null)
-            {
-                books = new List<Book>();
-            }
-
-            //CardCatalog ends here
-        }
-
-
-        //method to return book array
-        public Book[] ListOfBooks()
-        {
-            return books.ToArray();
-        }
-
-
-        //method to Add a book
-        public void AddBook(string bookAuthor,string bookTitle,int bookYear)
-        {
-
-            //nerwBook object of Book class
-            Book newBook = new Book
-            {
-                Author = bookAuthor,
-                Title = bookTitle,
-                Year = bookYear
-            };
-
-            books.Add(newBook);
-
-        }
-
-        public void Save()
-        {
-
-            using(System.IO.FileStream stream = new System.IO.FileStream(this._fileName, System.IO.FileMode.OpenOrCreate))
-            {
-
-
-                System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Book>));
-                serializer.Serialize(stream, books);
-
-                stream.Close();
-
-            }
-
-
-        }
-
-
-    }
+   
 
 
 }  
