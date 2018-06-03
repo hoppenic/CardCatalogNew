@@ -30,6 +30,7 @@ namespace CardCatalogNew
                 }
             }
 
+            //if books null make new list of books
             if (books == null)
             {
                 books = new List<Book>();
@@ -39,15 +40,15 @@ namespace CardCatalogNew
         }
 
 
-        //method to return book array
+        //method to return book array in main program
         public Book[] ListOfBooks()
         {
             return books.ToArray();
         }
 
 
-        //method to Add a book
-        public void AddBook(string bookAuthor, string bookTitle, int bookYear)
+        //method to Add a book, called in main program
+        public void AddBook(string bookAuthor, string bookTitle, int bookYear,int bookPages, int readTime)
         {
 
             //newBook object of Book class
@@ -55,7 +56,10 @@ namespace CardCatalogNew
             {
                 Author = bookAuthor,
                 Title = bookTitle,
-                Year = bookYear
+                Year = bookYear,
+                Pages=bookPages,
+                ReadTime=readTime
+                
             };
 
             books.Add(newBook);
